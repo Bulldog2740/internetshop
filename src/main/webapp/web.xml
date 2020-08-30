@@ -1,0 +1,36 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <filter>
+        <filter-name>Authentication Filter</filter-name>
+        <filter-class>com.internetshop.web.filters.AuthenticationFilter</filter-class>
+        <init-param>
+            <param-name>excludeUrls</param-name>
+            <param-value>/,/index,/products/all,/users/login,/users/registration,/index/inject-products</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Authentication Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>Authorization Filter</filter-name>
+        <filter-class>com.internetshop.web.filters.AuthorizationFilter</filter-class>
+        <init-param>
+            <param-name>adminUrls</param-name>
+            <param-value>/products/add,/products/delete,/users/all,/users/delete,/orders/all,/orders/delete,/orders/byUser,/orders/details</param-value>
+        </init-param>
+        <init-param>
+            <param-name>userUrls</param-name>
+            <param-value>/shoppingcart/*,/orders/history,/orders/create,/orders/details</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Authorization Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+</web-app>
